@@ -26,7 +26,7 @@ function CallScreen() {
     channel: "testingroom",
     token:
       "007eJxTYHg4bbeXbexdy7PsLmHrA92npDnOvrVM8OWk1X7Cm1iS+wMUGJLTjM0STcwNDcxMUkwsko0tkkyTTBINTFMtLFPM05INklWepDYEMjJM4bjDyMgAgSA+N0NJanFJZl56UX5+LgMDAPMnIYM=",
-  }, true);
+  });
 
   useClientEvent(agoraEngine, "user-joined", (user) => {
     console.log("The user", user.uid, " has joined the channel");
