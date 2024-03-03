@@ -10,10 +10,13 @@ import AgoraRTC, {
   useRTCClient,
   useClientEvent,
 } from "agora-rtc-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./CallScreen.css"
 
 function CallScreen(props) {
+  const navigate = useNavigate();
   const { isLoading: isLoadingCam, localCameraTrack } = useLocalCameraTrack();
-  const queryParameters = new URLSearchParams(window.location.search);
   const { isLoading: isLoadingMic, localMicrophoneTrack } =
     useLocalMicrophoneTrack();
   usePublish([localMicrophoneTrack, localCameraTrack]);
@@ -23,6 +26,8 @@ function CallScreen(props) {
     token:
       "007eJxTYHg4bbeXbexdy7PsLmHrA92npDnOvrVM8OWk1X7Cm1iS+wMUGJLTjM0STcwNDcxMUkwsko0tkkyTTBINTFMtLFPM05INklWepDYEMjJM4bjDyMgAgSA+N0NJanFJZl56UX5+LgMDAPMnIYM=",
   });
+
+  const [endCall, setEndCall] = useState(false);
 
   const remoteUsers = useRemoteUsers();
   const agoraEngine = useRTCClient();
@@ -38,23 +43,36 @@ function CallScreen(props) {
     console.log("The user", user.uid, " has published media in the channel");
   });
 
-  console.log(queryParameters.get("userID"));
+  useEffect(() => {
+    if (endCall) {
+      navigate("/");
+      return () => {
+        localCameraTrack?.close();
+        localMicrophoneTrack?.close();
+      };
+    }
+  }, [localCameraTrack, localMicrophoneTrack, endCall, navigate]);
   const deviceLoading = isLoadingMic || isLoadingCam;
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       {deviceLoading ? (
         <div>Loading devices...</div>
       ) : (
-        <div id="videos">
+        <div id="videos" className="video_screen">
           {/* Render the local video track */}
-          <div className="vid" style={{ height: 300, width: 600 }}>
+          <div
+            className="vid"
+            style={{ height: 300, width: 400, margin: "10px" }}
+          >
             <LocalVideoTrack track={localCameraTrack} play={true} />
           </div>
           {/* Render remote users' video and audio tracks */}
           {remoteUsers.map((remoteUser) => (
             <div
               className="vid"
-              style={{ height: 300, width: 600 }}
+              style={{ height: 300, width: 400, margin: "10px" }}
               key={remoteUser.uid}
             >
               <RemoteUser user={remoteUser} playVideo={true} playAudio={true} />
@@ -62,6 +80,9 @@ function CallScreen(props) {
           ))}
         </div>
       )}
+      <button onClick={() => setEndCall(true)} className="end_call_button">
+        End Call
+      </button>
     </div>
   );
 }
@@ -72,7 +93,7 @@ function CallScreenWithProvider() {
   );
   return (
     <AgoraRTCProvider client={client}>
-      <CallScreen client={client}/>
+      <CallScreen client={client} />
     </AgoraRTCProvider>
   );
 }
