@@ -1,5 +1,4 @@
-import AgoraRTC from "agora-rtc-sdk-ng";
-import {
+import AgoraRTC, {
   useJoin,
   LocalVideoTrack,
   RemoteUser,
@@ -9,18 +8,15 @@ import {
   useRemoteUsers,
   AgoraRTCProvider,
   useRTCClient,
-  useClientEvent
+  useClientEvent,
 } from "agora-rtc-react";
-import { useState } from "react";
 
-function CallScreen() {
-  const remoteUsers = useRemoteUsers();
-  const agoraEngine = useRTCClient();
+function CallScreen(props) {
   const { isLoading: isLoadingCam, localCameraTrack } = useLocalCameraTrack();
   const queryParameters = new URLSearchParams(window.location.search);
   const { isLoading: isLoadingMic, localMicrophoneTrack } =
     useLocalMicrophoneTrack();
-
+  usePublish([localMicrophoneTrack, localCameraTrack]);
   useJoin({
     appid: "cf36a471064d48c38b5b4a05e89d7fc0",
     channel: "testingroom",
@@ -28,6 +24,8 @@ function CallScreen() {
       "007eJxTYHg4bbeXbexdy7PsLmHrA92npDnOvrVM8OWk1X7Cm1iS+wMUGJLTjM0STcwNDcxMUkwsko0tkkyTTBINTFMtLFPM05INklWepDYEMjJM4bjDyMgAgSA+N0NJanFJZl56UX5+LgMDAPMnIYM=",
   });
 
+  const remoteUsers = useRemoteUsers();
+  const agoraEngine = useRTCClient();
   useClientEvent(agoraEngine, "user-joined", (user) => {
     console.log("The user", user.uid, " has joined the channel");
   });
@@ -40,7 +38,6 @@ function CallScreen() {
     console.log("The user", user.uid, " has published media in the channel");
   });
 
-  usePublish([localMicrophoneTrack, localCameraTrack]);
   console.log(queryParameters.get("userID"));
   const deviceLoading = isLoadingMic || isLoadingCam;
   return (
@@ -75,7 +72,7 @@ function CallScreenWithProvider() {
   );
   return (
     <AgoraRTCProvider client={client}>
-      <CallScreen />
+      <CallScreen client={client}/>
     </AgoraRTCProvider>
   );
 }
