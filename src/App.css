@@ -37,28 +37,24 @@
   }
 }
 
+html {
+  height: 100%;
+  background-image: url('../pics/1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 body {
-  background-color: black; /* Set your desired background color */
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  height: 100%;
 }
 
-.app-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.header {
-  background: linear-gradient(135deg, #4CAF50 0%, #2A8FBD 100%);
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-}
-
-
-.content {
-  margin-top: 20px;
+.top-container {
+  width: 100%;
+  background-color: #1c1d47; /* Set your desired background color */
+  border-radius: 15px 15px 0 0; /* Set border radius for top left and top right corners */
+  padding: 20px; /* Add padding as needed */
+  box-sizing: border-box; /* Include padding and border in the total width and height of the element */
+  /* Optionally add more styles such as border, box-shadow, etc. */
 }

@@ -1,0 +1,10 @@
+.top-container {
+    width: 80%; /* Shorten the width */
+    max-width: 1600px; /* Optionally set a maximum width */
+    margin: 50px auto; /* Center the container and add space from the top */
+    background-color: #1d1e49; /* Set your desired background color */
+    border-radius: 15px !important; /* Add !important */
+    padding: 20px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding and border in the total width and height of the element */
+    height: 75px;
+}

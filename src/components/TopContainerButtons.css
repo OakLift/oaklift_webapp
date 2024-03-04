@@ -1,0 +1,58 @@
+.login-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Vertically center items */
+    border-radius: 15px;
+    height: 100%; /* Ensure the container fills the height */
+}
+
+.login-button {
+    padding: 10px 20px;
+    font-size: 24px; /* Increase font size to 24px */
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.login-button:hover {
+    color: #007bff;
+}
+
+.secondary-buttons-container {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+}
+
+.secondary-button{
+  padding: 10px 20px;
+  font-size: 24px; /* Increase font size to 24px */
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+
+.login-button-container {
+  display: flex;
+  justify-content: space-between; /* Align items to the left and right edges */
+  align-items: center; /* Center items vertically */
+  border-radius: 15px;
+  height: 100%;
+}
+
+.secondary-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* Vertically center items */
+  border-radius: 15px;
+  height: 100%; /* Ensure the container fills the height */
+}
+
+.secondary-buttons-container button {
+  display: flex;
+  justify-content: center; 
+}
