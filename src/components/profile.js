@@ -1,10 +1,16 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
+import { useEffect } from 'react';
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
 
+  useEffect(() => {
+    if(isAuthenticated) {
+      localStorage.setItem("userID", user.name)
+    }
+  },[isAuthenticated, user])
   return (
     isAuthenticated && (
       <div> 
@@ -23,10 +29,10 @@ const Profile = () => {
         </div>
         
         <div className="button-container">
-          <Link to="/join_meeting">
+          <Link to="/home/join">
             <button>Join Meeting</button>
           </Link>
-          <Link to="/create_meeting">
+          <Link to="/home/create">
             <button>Create Meeting</button>
           </Link>
         </div>

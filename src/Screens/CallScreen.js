@@ -11,10 +11,10 @@ import AgoraRTC, {
   useClientEvent,
 } from "agora-rtc-react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./CallScreen.css"
 
-function CallScreen(props) {
+function CallScreen({token, channel, userID}) {
   const navigate = useNavigate();
   const { isLoading: isLoadingCam, localCameraTrack } = useLocalCameraTrack();
   const { isLoading: isLoadingMic, localMicrophoneTrack } =
@@ -22,9 +22,9 @@ function CallScreen(props) {
   usePublish([localMicrophoneTrack, localCameraTrack]);
   useJoin({
     appid: "cf36a471064d48c38b5b4a05e89d7fc0",
-    channel: "testingroom",
-    token:
-      "007eJxTYHg4bbeXbexdy7PsLmHrA92npDnOvrVM8OWk1X7Cm1iS+wMUGJLTjM0STcwNDcxMUkwsko0tkkyTTBINTFMtLFPM05INklWepDYEMjJM4bjDyMgAgSA+N0NJanFJZl56UX5+LgMDAPMnIYM=",
+    channel: channel,
+    token: token,
+    uid: userID
   });
 
   const [endCall, setEndCall] = useState(false);
@@ -49,6 +49,8 @@ function CallScreen(props) {
       return () => {
         localCameraTrack?.close();
         localMicrophoneTrack?.close();
+        localStorage.setItem("token_" + userID,"")
+        localStorage.setItem("channel_" + userID,"")
       };
     }
   }, [localCameraTrack, localMicrophoneTrack, endCall, navigate]);
@@ -91,11 +93,19 @@ function CallScreenWithProvider() {
   const client = useRTCClient(
     AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })
   );
-  return (
-    <AgoraRTCProvider client={client}>
-      <CallScreen client={client} />
-    </AgoraRTCProvider>
-  );
+  const [searchParams, setSearchParams] = useSearchParams()
+  const userID = searchParams.get("userID")
+  const token = localStorage.getItem("token_" + userID)
+  const channel = localStorage.getItem("channel_" + userID)
+  
+  console.warn(token, channel)
+  if(token != null && channel != null) {
+    return (
+      <AgoraRTCProvider client={client}>
+        <CallScreen client={client} token={token} channel={channel} userID={userID} />
+      </AgoraRTCProvider>
+    );
+  }
 }
 
 export default CallScreenWithProvider;

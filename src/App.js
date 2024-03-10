@@ -1,32 +1,28 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
-  Outlet,
-  Navigate,
-  useParams,
-  useNavigate } from 'react-router-dom';
-  import { useAuth0 } from '@auth0/auth0-react';
+} from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import MainAuth from "./components/MainAuth";
-import JoinMeetingPage from "./components/JoinMeetingPage";
-import CreateMeetingPage from "./components/CreateMeetingPage";
 import Profile from "./components/Profile";
-import Logout from "./components/LogoutButton"
+import Logout from "./components/LogoutButton";
+import HomeScreen from "./Screens/HomeScreen";
+import CallScreenWithProvider from "./Screens/CallScreen";
 
 function Home() {
   const { isAuthenticated, user } = useAuth0();
 
   return isAuthenticated && user ? (
     <div>
-      <Logout/>
-      <Profile/>
+      <Logout />
+      <Profile />
     </div>
   ) : (
     <div>
-      <MainAuth/>
+      <MainAuth />
     </div>
   );
 }
@@ -43,9 +39,9 @@ function AppLayout() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/join_meeting" element={<JoinMeetingPage/>} />
-        <Route path="/create_meeting" element={<CreateMeetingPage/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home/:mode" element={<HomeScreen />} />
+        <Route path="/call" element={<CallScreenWithProvider />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </>
@@ -55,7 +51,7 @@ function AppLayout() {
 function App() {
   return (
     <Router>
-        <AppLayout/>
+      <AppLayout />
     </Router>
   );
 }
