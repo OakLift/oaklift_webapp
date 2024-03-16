@@ -53,7 +53,7 @@ function CallScreen({token, channel, userID}) {
         localStorage.setItem("channel_" + userID,"")
       };
     }
-  }, [localCameraTrack, localMicrophoneTrack, endCall, navigate]);
+  }, [localCameraTrack, localMicrophoneTrack, endCall, navigate, userID]);
   const deviceLoading = isLoadingMic || isLoadingCam;
   return (
     <div
@@ -93,7 +93,7 @@ function CallScreenWithProvider() {
   const client = useRTCClient(
     AgoraRTC.createClient({ codec: "vp8", mode: "rtc" })
   );
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, ] = useSearchParams()
   const userID = searchParams.get("userID")
   const token = localStorage.getItem("token_" + userID)
   const channel = localStorage.getItem("channel_" + userID)
