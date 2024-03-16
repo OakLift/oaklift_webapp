@@ -1,5 +1,5 @@
 function generateToken(userID, channelName, expiration) {
-  return fetch("http://ec2-18-225-54-2.us-east-2.compute.amazonaws.com/getToken", {
+  return fetch("https://api.ak-coffee.info/getToken", {
     method: "POST",
     headers: {
       Accept: "application/json",
