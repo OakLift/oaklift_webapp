@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  user-guard:
+    image: prod/user-guard:latest
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
