@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./users.sql:/docker-entrypoint-initdb.d/users.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - oaklift-network
+
+  oaklift_webapp:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    ports:
+      - "8000:8000"
+    networks:
+      - oaklift-network
+
+networks:
+  app-network:
+    driver: bridge
