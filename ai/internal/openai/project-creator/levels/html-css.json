@@ -1,0 +1,66 @@
+{
+
+    "prompt-intro": "Imagine you are my professor and you need to create a simple HTML/CSS assignment for me to work on. Here is what I want to learn:",
+    "project-structure:": "Problem Statement, Implementation Guide, Test Cases, Tips/Advices",
+    "prompt-confirmation": "Do not make it overly complex. Keep it simple and please try your best to stick to the topics I gave you.",
+
+    "beginner": {
+      "html-topics": [
+        "Basic Elements",
+        "Attributes",
+        "Lists",
+        "Tables",
+        "Semantic HTML"
+      ],
+      "css-topics": [
+        "Basic Syntax",
+        "Box Model",
+        "Backgrounds",
+        "Positioning"
+      ]
+    },
+
+    "intermediate": {
+      "html-topics": [
+        "Forms",
+        "Media Elements",
+        "Advanced Elements",
+        "Accessibility"
+      ],
+      "css-topics": [
+        "Advanced Selectors",
+        "Flexbox",
+        "Grid Layout",
+        "Transitions and Animations",
+        "Responsive Design"
+      ]
+    },
+
+    "advanced": {
+      "html-topics": [
+        "Custom Data Attributes",
+        "Microdata and Metadata",
+        "Advanced Forms"
+      ],
+      "css-topics": [
+        "Preprocessors",
+        "Advanced Layouts",
+        "CSS Variables",
+        "Complex Animations",
+        "CSS Frameworks"
+      ]
+    },
+
+    "expert": {
+      "html-topics": [
+        "Progressive Web Apps",
+        "Web Components"
+      ],
+      "css-topics": [
+        "Advanced Performance",
+        "Cross-Browser Compatibility",
+        "Design Systems"
+      ]
+    }
+}
+

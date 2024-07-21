@@ -9,7 +9,8 @@ import (
 
 
 type ChatClient interface {
-	Chat(prompt string) (string, error)
+	CodeReview(prompt string) (string, error)
+	CreateProject(prompt string) (string, error)
 }
 
 type Dependencies struct {
@@ -26,7 +27,6 @@ func NewServer(serverDeps *Dependencies) (*Server, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to validate server dependencies")
 	}
-
 
 	return &Server{deps: serverDeps}, nil
 }

@@ -8,8 +8,15 @@ import (
 	openailib "github.com/sashabaranov/go-openai"
 )
 
+func (c *Client) CodeReview(prompt string) (string, error) {
+	return c.sendPrompt(prompt)
+}
 
-func (c *Client) Chat(prompt string) (string, error) {
+func (c *Client) CreateProject(prompt string) (string, error) {
+	return c.sendPrompt(prompt)
+}
+
+func (c *Client) sendPrompt(prompt string) (string, error)  {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -28,6 +35,5 @@ func (c *Client) Chat(prompt string) (string, error) {
 		return "", errors.Wrap(err, "OpenAI/Client: unable to send chat completion request to OpenAI")
 	}
 
-
 	return resp.Choices[0].Message.Content, nil
-}	
+}

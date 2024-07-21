@@ -1,0 +1,52 @@
+{
+    "beginner": {
+      "topics": [
+        "Introduction to JavaScript",
+        "Basic Syntax",
+        "Variables and Data Types",
+        "Operators",
+        "Control Structures (if, switch, loops)",
+        "Functions",
+        "Basic DOM Manipulation",
+        "Events"
+      ]
+    },
+    
+    "intermediate": {
+      "topics": [
+        "Object-Oriented Programming",
+        "Advanced Functions (closures, callbacks, higher-order functions)",
+        "Asynchronous JavaScript (promises, async/await)",
+        "Error Handling",
+        "Advanced DOM Manipulation",
+        "Event Delegation",
+        "Working with APIs (Fetch, AJAX)",
+        "Local Storage"
+      ]
+    },
+
+    "advanced": {
+      "topics": [
+        "JavaScript Design Patterns",
+        "Modules and Tooling (ES6 modules, bundlers)",
+        "Advanced Asynchronous Programming",
+        "Web Workers",
+        "Performance Optimization",
+        "Testing (unit tests, integration tests)",
+        "Security (XSS, CORS, etc.)",
+        "Advanced Debugging Techniques"
+      ]
+    },
+
+    "expert": {
+      "topics": [
+        "Progressive Web Apps",
+        "Service Workers",
+        "JavaScript Frameworks (React, Angular, Vue)",
+        "Server-Side JavaScript (Node.js, Express)",
+        "TypeScript",
+        "WebAssembly",
+        "Custom JavaScript Libraries"
+      ]
+    }
+}
